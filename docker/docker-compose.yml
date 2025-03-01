@@ -12,7 +12,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: product
+      MYSQL_DATABASE: products
       TZ: Asia/Seoul
     ports:
       - "3667:3306"
