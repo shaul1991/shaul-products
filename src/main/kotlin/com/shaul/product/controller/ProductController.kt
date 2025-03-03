@@ -1,8 +1,9 @@
 package com.shaul.product.controller
 
-import com.shaul.product.domain.Product
 import com.shaul.product.request.CreateProductRequest
 import com.shaul.product.request.UpdateProductRequest
+import com.shaul.product.response.ProductListResponse
+import com.shaul.product.response.ProductResponse
 import com.shaul.product.service.ProductService
 import org.springframework.web.bind.annotation.*
 
@@ -15,8 +16,13 @@ class ProductController(
     fun getProducts(
         @RequestParam(required = false) lastId: String?,
         @RequestParam(defaultValue = "10") limit: Int,
-    ): List<Product> {
-        return productService.getProducts(lastId = lastId, limit = limit)
+    ): ProductListResponse {
+        return ProductListResponse.fromProducts(
+            products = productService.getProducts(lastId = lastId, limit = limit)
+                .map { ProductResponse.fromProduct(it) },
+            searchId = lastId,
+            limit = limit,
+        )
     }
 
     @PostMapping
@@ -29,8 +35,8 @@ class ProductController(
     @GetMapping("/{id}")
     fun show(
         @PathVariable id: String,
-    ): Product {
-        return productService.show(id = id)
+    ): ProductResponse {
+        return ProductResponse.fromProduct(productService.show(id = id))
     }
 
     @PutMapping("/{id}")
