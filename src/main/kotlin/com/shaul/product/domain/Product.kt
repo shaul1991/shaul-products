@@ -50,4 +50,8 @@ data class Product(
     fun delete() {
         deletedAt = LocalDateTime.now()
     }
+
+    fun isDeleted(): Boolean {
+        return deletedAt != null
+    }
 }

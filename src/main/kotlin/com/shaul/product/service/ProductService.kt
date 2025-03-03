@@ -22,7 +22,13 @@ class ProductService(
     }
 
     fun show(id: String): Product {
-        return productRepository.findById(id).get().toDomain()
+        val product = productRepository.findById(id).get().toDomain()
+
+        if (product.isDeleted()) {
+            throw Exception("Product not found")
+        }
+
+        return product
     }
 
     fun getProducts(lastId: String?, limit: Int): List<Product> {
