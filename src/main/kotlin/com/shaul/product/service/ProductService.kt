@@ -9,4 +9,8 @@ class ProductService(
     private val productRepository: ProductRepository,
 ) {
     fun saveProduct(product: Product) = productRepository.save(product.toEntity())
+
+    fun show(id: String): Product {
+        return productRepository.findById(id).get().toDomain()
+    }
 }

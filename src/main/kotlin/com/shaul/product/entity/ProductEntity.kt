@@ -1,5 +1,6 @@
 package com.shaul.product.entity
 
+import com.shaul.product.domain.Product
 import jakarta.persistence.Id
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
@@ -19,4 +20,17 @@ data class ProductEntity(
     @LastModifiedDate
     var updatedAt: LocalDateTime = LocalDateTime.now(),
     var deletedAt: LocalDateTime? = null,
-)
+) {
+    fun toDomain(): Product {
+        return Product(
+            id = id,
+            name = name,
+            price = price,
+            description = description,
+            imageUrl = imageUrl,
+            createdAt = createdAt,
+            updatedAt = updatedAt,
+            deletedAt = deletedAt,
+        )
+    }
+}
