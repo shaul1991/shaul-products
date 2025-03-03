@@ -40,4 +40,11 @@ class ProductController(
     ) {
         productService.update(id = id, request = request)
     }
+
+    @DeleteMapping("/{id}")
+    fun delete(
+        @PathVariable id: String,
+    ) {
+        productService.delete(id = id)
+    }
 }

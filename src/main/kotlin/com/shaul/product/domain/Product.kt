@@ -46,4 +46,8 @@ data class Product(
         imageUrl = request.imageUrl
         updatedAt = LocalDateTime.now()
     }
+
+    fun delete() {
+        deletedAt = LocalDateTime.now()
+    }
 }

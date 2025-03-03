@@ -43,4 +43,10 @@ class ProductService(
         product.update(request = request)
         productRepository.save(product.toEntity())
     }
+
+    fun delete(id: String) {
+        val product = productRepository.findById(id).get().toDomain()
+        product.delete()
+        productRepository.save(product.toEntity())
+    }
 }
