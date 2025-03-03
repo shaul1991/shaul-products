@@ -2,6 +2,7 @@ package com.shaul.product.controller
 
 import com.shaul.product.domain.Product
 import com.shaul.product.request.CreateProductRequest
+import com.shaul.product.request.UpdateProductRequest
 import com.shaul.product.service.ProductService
 import org.springframework.web.bind.annotation.*
 
@@ -11,24 +12,32 @@ class ProductController(
     private val productService: ProductService,
 ) {
     @GetMapping
-    fun getAllProducts(
+    fun getProducts(
         @RequestParam(required = false) lastId: String?,
         @RequestParam(defaultValue = "10") limit: Int,
     ): List<Product> {
-        return productService.getProductsAfterId(lastId = lastId, limit = limit)
+        return productService.getProducts(lastId = lastId, limit = limit)
     }
 
     @PostMapping
-    fun createProduct(
+    fun create(
         @RequestBody request: CreateProductRequest,
     ) {
-        productService.saveProduct(product = request.toDomain())
+        productService.save(request = request)
     }
 
     @GetMapping("/{id}")
-    fun showProduct(
+    fun show(
         @PathVariable id: String,
     ): Product {
         return productService.show(id = id)
+    }
+
+    @PutMapping("/{id}")
+    fun update(
+        @PathVariable id: String,
+        @RequestBody request: UpdateProductRequest,
+    ) {
+        productService.update(id = id, request = request)
     }
 }

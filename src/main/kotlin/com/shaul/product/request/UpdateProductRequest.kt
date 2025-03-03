@@ -1,6 +1,6 @@
 package com.shaul.product.request
 
-data class CreateProductRequest(
+data class UpdateProductRequest(
     val name: String,
     val price: String = "",
     val description: String = "",
