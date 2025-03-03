@@ -10,6 +10,14 @@ import org.springframework.web.bind.annotation.*
 class ProductController(
     private val productService: ProductService,
 ) {
+    @GetMapping
+    fun getAllProducts(
+        @RequestParam(required = false) lastId: String?,
+        @RequestParam(defaultValue = "10") limit: Int,
+    ): List<Product> {
+        return productService.getProductsAfterId(lastId = lastId, limit = limit)
+    }
+
     @PostMapping
     fun createProduct(
         @RequestBody request: CreateProductRequest,
