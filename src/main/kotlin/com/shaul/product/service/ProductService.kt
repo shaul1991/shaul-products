@@ -31,15 +31,15 @@ class ProductService(
         return product
     }
 
-    fun getProducts(lastId: String?, limit: Int): List<Product> {
+    fun getProducts(lastId: String?, pageSize: Int): List<Product> {
         val query = Query()
         if (lastId != null) {
             query.addCriteria(Criteria.where("id").lt(lastId))
         }
 
-        query.with(Sort.by(Sort.Direction.DESC, "createdAt"))
+        query.with(Sort.by(Sort.Direction.DESC, "id"))
         query.addCriteria(Criteria.where("deletedAt").isNull())
-        query.limit(limit)
+        query.limit(pageSize)
 
         return mongoTemplate.find(query, ProductEntity::class.java).map { it.toDomain() }
     }

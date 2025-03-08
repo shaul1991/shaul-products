@@ -2,17 +2,19 @@ package com.shaul.product.response
 
 data class ProductListResponse(
     val products: List<ProductResponse>,
-    val searchId: String?,
-    val lastId: String?,
-    val limit: Int,
+    val cursorPaginate: CursorPaginate,
 ) {
     companion object {
-        fun fromProducts(products: List<ProductResponse>, searchId: String?, limit: Int): ProductListResponse {
+        fun fromProducts(
+            products: List<ProductResponse>,
+            pageSize: Int,
+        ): ProductListResponse {
             return ProductListResponse(
                 products = products,
-                searchId = searchId,
-                lastId = products.lastOrNull()?.id,
-                limit = limit,
+                cursorPaginate = CursorPaginate(
+                    next = if (products.size >= pageSize) products.last().id else null,
+                    pageSize = pageSize,
+                )
             )
         }
     }
