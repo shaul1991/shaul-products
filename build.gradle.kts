@@ -19,6 +19,7 @@ repositories {
     mavenCentral()
 }
 
+// https://github.com/spring-cloud/spring-cloud-gateway/issues/3703
 extra["springCloudVersion"] = "2023.0.5"
 
 dependencies {
