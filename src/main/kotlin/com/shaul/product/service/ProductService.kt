@@ -1,5 +1,6 @@
 package com.shaul.product.service
 
+import com.shaul.product.client.FileServerClient
 import com.shaul.product.domain.Product
 import com.shaul.product.entity.ProductEntity
 import com.shaul.product.repository.ProductRepository
@@ -10,14 +11,20 @@ import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.data.mongodb.core.query.Query
 import org.springframework.stereotype.Service
+import org.springframework.web.multipart.MultipartFile
 
 @Service
 class ProductService(
     private val productRepository: ProductRepository,
     private val mongoTemplate: MongoTemplate,
+    private val fileServerClient: FileServerClient,
 ) {
-    fun save(request: CreateProductRequest) {
+    fun save(request: CreateProductRequest, images: List<MultipartFile>?) {
         val product = Product.fromCreateRequest(request = request)
+        if (images != null) {
+            product.images = fileServerClient.publicFileUpload(files = images).split(",")
+        }
+
         productRepository.save(product.toEntity())
     }
 

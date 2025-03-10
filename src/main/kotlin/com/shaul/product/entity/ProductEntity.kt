@@ -14,7 +14,7 @@ data class ProductEntity(
     val name: String = "",
     val price: String = "",
     val description: String = "",
-    val imageUrl: String = "",
+    val images: List<String>? = null,
     @CreatedDate
     val createdAt: LocalDateTime = LocalDateTime.now(),
     @LastModifiedDate
@@ -27,7 +27,7 @@ data class ProductEntity(
             name = name,
             price = price,
             description = description,
-            imageUrl = imageUrl,
+            images = images,
             createdAt = createdAt,
             updatedAt = updatedAt,
             deletedAt = deletedAt,

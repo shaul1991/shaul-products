@@ -7,6 +7,7 @@ import com.shaul.product.response.ProductListResponse
 import com.shaul.product.response.ProductResponse
 import com.shaul.product.service.ProductService
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 
 @RestController
 @RequestMapping("/api/v1/product")
@@ -29,9 +30,10 @@ class ProductController(
 
     @PostMapping
     fun create(
-        @RequestBody request: CreateProductRequest,
+        @RequestPart("request") request: CreateProductRequest,
+        @RequestPart(required = false) images: List<MultipartFile>?,
     ) {
-        productService.save(request = request)
+        productService.save(request = request, images = images)
     }
 
     @GetMapping("/{id}")

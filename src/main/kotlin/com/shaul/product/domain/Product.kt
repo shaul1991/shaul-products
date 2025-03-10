@@ -10,7 +10,7 @@ data class Product(
     var name: String = "",
     var price: String = "",
     var description: String = "",
-    var imageUrl: String = "",
+    var images: List<String>? = null,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     var updatedAt: LocalDateTime = LocalDateTime.now(),
     var deletedAt: LocalDateTime? = null,
@@ -21,7 +21,6 @@ data class Product(
                 name = request.name,
                 price = request.price,
                 description = request.description,
-                imageUrl = request.imageUrl,
             )
         }
     }
@@ -32,7 +31,7 @@ data class Product(
             name = name,
             price = price,
             description = description,
-            imageUrl = imageUrl,
+            images = images,
             createdAt = createdAt,
             updatedAt = updatedAt,
             deletedAt = deletedAt,
@@ -43,7 +42,7 @@ data class Product(
         name = request.name
         price = request.price
         description = request.description
-        imageUrl = request.imageUrl
+        images = request.images
         updatedAt = LocalDateTime.now()
     }
 
