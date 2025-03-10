@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "1.9.25"
-    id("org.springframework.boot") version "3.4.3"
+    id("org.springframework.boot") version "3.3.9"
     id("io.spring.dependency-management") version "1.1.7"
     kotlin("plugin.jpa") version "1.9.25"
 }
@@ -19,7 +19,7 @@ repositories {
     mavenCentral()
 }
 
-extra["springCloudVersion"] = "2024.0.0"
+extra["springCloudVersion"] = "2023.0.5"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -41,8 +41,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
     // Swagger UI
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.0")
-    implementation("org.springdoc:springdoc-openapi-starter-common:2.8.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
+    implementation("org.springdoc:springdoc-openapi-starter-common:2.6.0")
 
     // openfeign
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
