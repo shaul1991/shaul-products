@@ -46,6 +46,9 @@ dependencies {
 
     // openfeign
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+
+    // Spring Cloud Eureka
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 }
 
 kotlin {
