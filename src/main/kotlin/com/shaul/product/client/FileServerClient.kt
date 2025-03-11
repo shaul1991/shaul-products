@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestPart
 import org.springframework.web.multipart.MultipartFile
 
-@FeignClient(name = "file-server", url = "http://localhost:8109")
+@FeignClient(name = "image-service")
 interface FileServerClient {
     @RequestMapping(method = [RequestMethod.POST], value = ["/files"], consumes = ["multipart/form-data"])
     fun publicFileUpload(@RequestPart("files") files: List<MultipartFile>): String
