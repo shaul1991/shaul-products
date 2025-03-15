@@ -53,6 +53,9 @@ dependencies {
 
     // Spring Cloud Config Client
     implementation("org.springframework.cloud:spring-cloud-starter-config")
+
+    // Spring Cloud circuit breaker
+    implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
 }
 
 kotlin {

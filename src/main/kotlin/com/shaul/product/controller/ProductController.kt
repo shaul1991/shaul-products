@@ -6,6 +6,7 @@ import com.shaul.product.response.BaseResponse
 import com.shaul.product.response.ProductListResponse
 import com.shaul.product.response.ProductResponse
 import com.shaul.product.service.ProductService
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
@@ -29,11 +30,20 @@ class ProductController(
     }
 
     @PostMapping
+    @CircuitBreaker(name = "productService", fallbackMethod = "productServiceFallback")
     fun create(
         @RequestPart("request") request: CreateProductRequest,
         @RequestPart(required = false) images: List<MultipartFile>?,
     ) {
         productService.save(request = request, images = images)
+    }
+
+    fun productServiceFallback(
+        request: CreateProductRequest,
+        images: List<MultipartFile>?,
+        throwable: Throwable,
+    ) {
+        println("productServiceFallback: $throwable")
     }
 
     @GetMapping("/{id}")
