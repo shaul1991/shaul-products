@@ -38,10 +38,10 @@ class ProductService(
         return product
     }
 
-    fun getProducts(lastId: String?, pageSize: Int): List<Product> {
+    fun getProducts(next: String?, pageSize: Int): List<Product> {
         val query = Query()
-        if (lastId != null) {
-            query.addCriteria(Criteria.where("id").lt(lastId))
+        if (next != null) {
+            query.addCriteria(Criteria.where("id").lt(next))
         }
 
         query.with(Sort.by(Sort.Direction.DESC, "id"))

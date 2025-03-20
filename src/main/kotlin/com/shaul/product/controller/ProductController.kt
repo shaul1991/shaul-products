@@ -17,12 +17,12 @@ class ProductController(
 ) {
     @GetMapping
     fun getProducts(
-        @RequestParam(required = false) lastId: String?,
+        @RequestParam(required = false) next: String?,
         @RequestParam(defaultValue = "10") pageSize: Int,
     ): BaseResponse<ProductListResponse> {
         return BaseResponse.success(
             ProductListResponse.fromProducts(
-                products = productService.getProducts(lastId = lastId, pageSize = pageSize)
+                products = productService.getProducts(next = next, pageSize = pageSize)
                     .map { ProductResponse.fromProduct(it) },
                 pageSize = pageSize,
             )
